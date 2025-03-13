@@ -1,10 +1,11 @@
 import React from 'react';
+import LockedHomePage from './pages/LockedHomePage';
+import './styles/style.css';
 
 function App() {
   return (
     <div>
-      <h1>Mon Application React</h1>
-      <p>Bienvenue sur ma page d'accueil</p>
+      <LockedHomePage />
     </div>
   );
 }

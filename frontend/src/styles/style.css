@@ -1,0 +1,89 @@
+@font-face {
+    font-family: 'Luckiest Guy';
+    src: url('../static/fonts/Luckiest_Guy/LuckiestGuy-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+body {
+    background-color: #161616;
+    padding: 20px;
+    margin: 0;
+}
+
+.locked-home-page-header-logo {
+    font-family: 'Luckiest Guy';
+    font-size: 30px;
+    color: #FFFFFF;
+}
+
+.locked-home-page-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ConnexionNavBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    gap: 10px;
+    width: 185px;
+    height: 40px;
+    background-color: #FFFFFF;
+    padding: 5px;
+    margin: 0;
+}
+
+.Connexion-button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+.Connexion-button:hover .Connexion-button-text {
+    color: rgb(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+.Inscription-button {
+    width: 100px;
+    height: 100%;
+    border-radius: 10px;
+    background-color: #2F2F2F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.Inscription-button:hover {
+    background-color: rgba(47, 47, 47, 0.85);
+    cursor: pointer;
+}
+
+.Connexion-button-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #2F2F2F;
+}
+
+.Inscription-button-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #FFFFFF;
+}
+
+
+.footer-logo {
+    font-family: 'Luckiest Guy';
+    font-size: 30px;
+    color: #FFFFFF;
+}
