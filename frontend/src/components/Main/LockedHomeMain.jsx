@@ -1,8 +1,13 @@
 import React from "react"
+import LockedMainCard from "./LockedMainCard"
+import MainText from "./MainText"
 
 function LockedHomeMain() {
     return (
-        <div>LockedHomeMain</div>
+        <div className="LockedHomeMain">
+            <LockedMainCard/>
+            <MainText/>
+        </div>
     )
 }
 

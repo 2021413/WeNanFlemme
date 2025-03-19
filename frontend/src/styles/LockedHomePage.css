@@ -5,16 +5,25 @@
     font-style: normal;
 }
 
-
 body {
     background-color: #161616;
     padding: 20px;
     margin: 0;
 }
 
+.LockedHomeMain {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 80vh;
+}
+
 .locked-home-page-header-logo {
+    margin: 0;
     font-family: 'Luckiest Guy';
     font-size: 30px;
+    letter-spacing: 1px;
     color: #FFFFFF;
 }
 
@@ -40,16 +49,13 @@ body {
 
 .Connexion-button {
     width: 100%;
-    height: 100%;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 5px;
-}
+    text-decoration: none;
 
-.Connexion-button:hover .Connexion-button-text {
-    color: rgb(0, 0, 0, 0.4);
-    cursor: pointer;
 }
 
 .Inscription-button {
@@ -62,6 +68,12 @@ body {
     align-items: center;
     padding-left: 20px;
     padding-right: 20px;
+    text-decoration: none;
+}
+
+.Connexion-button:hover .Connexion-button-text {
+    color: rgb(0, 0, 0, 0.4);
+    cursor: pointer;
 }
 
 .Inscription-button:hover {
@@ -72,15 +84,44 @@ body {
 .Connexion-button-text {
     font-family: 'Inter', sans-serif;
     font-size: 12px;
+    letter-spacing: 0.5px;
     color: #2F2F2F;
 }
 
 .Inscription-button-text {
     font-family: 'Inter', sans-serif;
     font-size: 12px;
+    letter-spacing: 1px;
     color: #FFFFFF;
 }
 
+.Main-title {
+    font-family: 'Luckiest Guy';
+    font-size: 40px;
+    color: #FFFFFF;
+    width: 50%;
+    letter-spacing: 1px;
+}
+
+.Check-img {
+    height: min-content;
+}
+
+.Check-lign {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    height: min-content;
+    margin-bottom: 5pz;
+}
+
+.Check-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 100;
+    font: 14px;
+    color: #FFFFFF;
+    margin: 0;
+}
 
 .footer-logo {
     font-family: 'Luckiest Guy';

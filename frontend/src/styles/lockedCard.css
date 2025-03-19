@@ -1,0 +1,134 @@
+.Card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    height: 380px;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    padding: 8px;
+    margin-left: 100px;
+    margin-right: 150px;
+}
+
+.Card-Overlay {
+    position: absolute;
+    top: 26.20%;
+    left: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 266px;
+    height: 396px;
+    background-color: #000000;    
+    opacity: 90%;
+    border-radius: 16px;
+}
+
+.Lock-img {
+    width: 125px;
+    height: 125px;
+}
+
+.Text-Locked-Card-Overlay {
+    font-family: 'inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-align: center;
+    width: 175px;
+    color: #FFFFFF;
+}
+
+.Importation-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.File, .Folder{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 60px;
+    background-color: #DDE6FF;
+    border-radius: 8px;
+}
+
+.File:hover, .Folder:hover {
+    background-color: #C4D6FF;
+}
+
+.Importation-buttons-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+}
+
+.Importation-buttons-icons {
+    width: 24px;
+    height: 24px;
+    transform: translateY(30%);
+}
+
+.Maximum-size {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: rgb(0, 0, 0, 0.5);
+    padding-right: 60%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.Titre {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: rgb(0, 0, 0, 0.5);
+}
+
+.Description {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: rgb(0, 0, 0, 0.5);
+}
+
+.Input-titre {
+    width: 80%;
+    height: 25px;
+    border: none;
+}
+
+.Input-description {
+    width: 80%;
+    height: 100px;
+    border: none;
+}
+
+.Bar {
+    width: 225px;
+    height: 1px;
+    background-color: #000000;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.Convert-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 50px;
+    border-radius: 15px;
+    background-color: #3B57E6;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+}

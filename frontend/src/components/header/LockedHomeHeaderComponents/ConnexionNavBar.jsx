@@ -1,16 +1,17 @@
-import React from "react";
+import React from "react"
+import { Link } from "react-router-dom"
 
 function ConnexionNavBar() {
     return (
         <div className="ConnexionNavBar">
-            <div className="Connexion-button">
+            <Link to="/connexion" className="Connexion-button">
                 <p className="Connexion-button-text">Connexion</p>
-            </div>
-            <div className="Inscription-button">
+            </Link>
+            <Link to="/inscription" className="Inscription-button">
                 <p className="Inscription-button-text">S'inscrire</p>
-            </div>
+            </Link>
         </div>
     )
 }
 
-export default ConnexionNavBar;
+export default ConnexionNavBar
