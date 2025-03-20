@@ -17,19 +17,19 @@ function InscriptionPage(){
                         <ul>
 
                             <li>
-                                <input className="Text-Input" type="text" name="user_name" id="user_name" placeholder="Search.." />
+                                <input className="Text-Input" type="text" name="email" id="email" placeholder="adresse email" />
                             </li>
 
                             <li>
-                                <input className="Text-Input" type="text" name="name" id="name" placeholder="Search.." />
+                                <input className="Text-Input" type="text" name="pseudo" id="pseudo" placeholder="pseudo" />
                             </li>
 
                             <li>
-                                <input className="Password-Input" type="password" name="password" id="password" placeholder="Search.." />
+                                <input className="Password-Input" type="password" name="password" id="password" placeholder="Mot de passe" />
                             </li>
 
                             <li>
-                                <input className="Password-Input" type="password" name="CPassword" id="CPassword" placeholder="Search.." />
+                                <input className="Password-Input" type="password" name="CPassword" id="CPassword" placeholder="Confirmer" />
                             </li>
 
                             <input className="Submit-Button" type="submit" value="Inscription" />
