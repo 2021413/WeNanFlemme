@@ -116,10 +116,10 @@ li {
 }
 
 .Switch-To-Identifier {
+    color: white;
     font-weight: 200;
     cursor: pointer;
     text-decoration: none;
-    color: white;
 }
 
 .error-message {

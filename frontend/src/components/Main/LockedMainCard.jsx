@@ -1,6 +1,6 @@
 import React from "react"
 import MainCard from "./MainCard"
-import ConnexionNavBar from "../header/LockedHomeHeaderComponents/ConnexionNavBar"
+import ConnexionNavBar from "../header/ConnexionNavBar"
 import "../../styles/lockedCard.css"
 
 function LockedMainCard(){

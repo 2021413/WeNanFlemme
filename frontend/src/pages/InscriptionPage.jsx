@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { Link } from "react-router-dom"
 import Header from '../components/header/ReturnHeader'
 import '../styles/InscriptionPage.css'
 
@@ -31,7 +32,7 @@ function InscriptionPage(){
         }
 
         try {
-            const response = await fetch('http://localhost:8000/api/auth/register', {
+            const response = await fetch('http://localhost:8888/api/auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -96,7 +97,7 @@ function InscriptionPage(){
                         </ul>
                     </form>
                 </div>
-                <p className="Text-switch-To-Indentifier">Vous avez déjà un compte ? <span className="Switch-To-Identifier">S'identifier</span></p>
+                <p className="Text-switch-To-Indentifier">Vous avez déjà un compte ? <span><Link className="Switch-To-Identifier" to="/connexion">S'identifier</Link></span></p>
             </div>
         </div>
     )
