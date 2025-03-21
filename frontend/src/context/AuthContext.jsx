@@ -1,9 +1,22 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+    // Initialiser l'état user avec les données du sessionStorage
+    const [user, setUser] = useState(() => {
+        const sessionUser = sessionStorage.getItem('user');
+        return sessionUser ? JSON.parse(sessionUser) : null;
+    });
+
+    // Mettre à jour le sessionStorage quand user change
+    useEffect(() => {
+        if (user) {
+            sessionStorage.setItem('user', JSON.stringify(user));
+        } else {
+            sessionStorage.removeItem('user');
+        }
+    }, [user]);
 
     const login = (userData) => {
         setUser(userData);
@@ -11,6 +24,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         setUser(null);
+        sessionStorage.removeItem('user');
     };
 
     return (
