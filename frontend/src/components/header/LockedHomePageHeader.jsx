@@ -1,5 +1,5 @@
 import React from "react";
-import ConnexionNavBar from "./LockedHomeHeaderComponents/ConnexionNavBar.jsx";
+import ConnexionNavBar from "./ConnexionNavBar.jsx";
 
 function Header() {
     return (

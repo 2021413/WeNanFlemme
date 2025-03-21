@@ -1,18 +1,25 @@
-import React from "react"
+import React, { useRef } from "react"
 import "../../styles/card.css"
 
 function MainCard() {
+    const fileInputRef = useRef(null)
+
+    const handleFileUpload = () => {
+        fileInputRef.current.click()
+    }
+
     return(
         <div className="Card">
             <div className="Importation-buttons">
-                <div className="File">
+                <button className="File" onClick={handleFileUpload}>
+                    <input type="file" className="File-Button" ref={fileInputRef} style={{ display: 'none', }} />
                     <img src="../../static/icons/Plus-icon.svg" className="Importation-buttons-icons"/>
                     <p className="Importation-buttons-text">Ajouter un fichier</p>
-                </div>
-                <div className="Folder">
+                </button>
+                <button className="Folder" >
                     <img src="../../static/icons/Folder-icon.svg" className="Importation-buttons-icons"/>
                     <p className="Importation-buttons-text">Ajouter un dossier</p>
-                </div>
+                </button>
             </div>
             <p className="Maximum-size">jusqu'à 20Mo</p>
             <form className="Form">

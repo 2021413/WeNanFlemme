@@ -116,34 +116,10 @@ li {
 }
 
 .Switch-To-Identifier {
+    color: white;
     font-weight: 200;
     cursor: pointer;
     text-decoration: none;
-    color: white;
-}
-
-.error-message {
-    color: #ff4444;
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    margin-bottom: 20px;
-    padding: 10px 20px;
-    background-color: rgba(255, 68, 68, 0.1);
-    border-radius: 15px;
-    width: 500px;
-    text-align: center;
-}
-
-.success-message {
-    color: #4CAF50;
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    margin-bottom: 20px;
-    padding: 10px 20px;
-    background-color: rgba(76, 175, 80, 0.1);
-    border-radius: 15px;
-    width: 500px;
-    text-align: center;
 }
 
 .error-message {
