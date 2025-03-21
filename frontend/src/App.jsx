@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<LockedHomePage />} />
         <Route path="/inscription" element={<InscriptionPage />} />
         <Route path="/connexion" element={<ConnexionPage />} />
-        <Route path="/let's-transfer" element={<UnlockedHomePage />} />
+        <Route path="/unlocked-home" element={<UnlockedHomePage />} />
       </Routes>
     </Router>
   )

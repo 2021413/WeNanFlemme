@@ -1,0 +1,81 @@
+@font-face {
+    font-family: 'Luckiest Guy';
+    src: url('../static/fonts/Luckiest_Guy/LuckiestGuy-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.Header-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min-content;
+    cursor: pointer;
+    background-color: #FFFFFF;
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.WNF-Title {
+    font-family: 'Luckiest Guy';
+    font-size: 30px;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    width: min-content;
+}
+
+h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 100;
+}
+
+.header-title-and-icon {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+
+.dropdown {
+    display: none; /* Masquer par défaut */
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.dropdown.open {
+    display: flex; /* Afficher lorsque ouvert */
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.button {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.disconnect {
+    color: red;
+}
+
+.separator {
+    width: 100%;
+    height: 1px;
+    background-color: #000;
+    margin: 5px 0;
+} 

@@ -105,21 +105,24 @@ li {
     color: white;
 }
 
-.Text-switch-To-Indentifier {
-    color: #606060;
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-weight: 100;
-    cursor: default;
-    padding: 0;
-    margin: 0;
+.Text-switch {
+    margin-top: 20px;
+    text-align: center;
+    color: #666;
 }
 
-.Switch-To-Identifier {
-    color: white;
-    font-weight: 200;
-    cursor: pointer;
+.Switch-wrapper {
+    margin-left: 5px;
+}
+
+.Switch-link {
+    color: #007bff;
     text-decoration: none;
+    cursor: pointer;
+}
+
+.Switch-link:hover {
+    text-decoration: underline;
 }
 
 .error-message {

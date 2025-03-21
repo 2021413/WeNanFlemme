@@ -61,36 +61,40 @@ class AuthController extends BaseController {
     }
 
     public function login() {
-        $data = $this->getRequestBody();
-        
-        $rules = [
-            'username' => 'required',
-            'password' => 'required'
-        ];
-        
-        $errors = $this->validateRequest($data, $rules);
-        if (!empty($errors)) {
-            return $this->jsonResponse(['errors' => $errors], 400);
+        try {
+            $data = $this->getRequestBody();
+            
+            $rules = [
+                'email' => 'required|email',
+                'password' => 'required|min:6'
+            ];
+            
+            $errors = $this->validateRequest($data, $rules);
+            if (!empty($errors)) {
+                return $this->jsonResponse(['errors' => $errors], 400);
+            }
+    
+            $user = $this->userModel->findByEmail($data['email']);
+            if (!$user || !$this->userModel->verifyPassword($user['password_hash'], $data['password'])) {
+                return $this->jsonResponse(['error' => 'Invalid credentials'], 401);
+            }
+    
+            session_start();
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+    
+            return $this->jsonResponse([
+                'message' => 'Login successful',
+                'user' => [
+                    'id' => $user['id'],
+                    'username' => $user['username'],
+                    'email' => $user['email']
+                ]
+            ]);
+        } catch (\Exception $e) {
+            error_log("Exception in login: " . $e->getMessage());
+            return $this->jsonResponse(['error' => 'Internal server error'], 500);
         }
-
-        $user = $this->userModel->findByUsername($data['username']);
-        if (!$user || !$this->userModel->verifyPassword($user['password_hash'], $data['password'])) {
-            return $this->jsonResponse(['error' => 'Invalid credentials'], 401);
-        }
-
-        // Créer une session simple (à améliorer avec JWT dans un vrai projet)
-        session_start();
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
-
-        return $this->jsonResponse([
-            'message' => 'Login successful',
-            'user' => [
-                'id' => $user['id'],
-                'username' => $user['username'],
-                'email' => $user['email']
-            ]
-        ]);
     }
 
     public function logout() {
