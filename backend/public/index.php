@@ -1,5 +1,8 @@
 <?php
 
+// Inclure la configuration CORS
+require_once __DIR__ . '/../src/config/cors.php';
+
 // Afficher les erreurs en développement
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -32,19 +35,6 @@ set_error_handler(function ($severity, $message, $file, $line) {
 try {
     // Charger les variables d'environnement
     App\Config\Environment::load(__DIR__ . '/../.env');
-
-    // Configuration des headers CORS
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-    header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
-    header('Access-Control-Allow-Credentials: true');
-    header('Access-Control-Max-Age: 86400'); // 24 heures
-
-    // Gérer les requêtes OPTIONS (pre-flight)
-    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-        header('HTTP/1.1 200 OK');
-        exit();
-    }
 
     // Définir le type de contenu par défaut
     header('Content-Type: application/json; charset=UTF-8');

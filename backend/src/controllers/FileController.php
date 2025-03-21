@@ -27,9 +27,10 @@ class FileController extends BaseController {
         }
 
         $file = $_FILES['file'];
-        $fileName = basename($file['name']);
+        $originalName = basename($file['name']);
         $fileSize = $file['size'];
-        $uniqueName = uniqid() . '_' . $fileName;
+        $title = $_POST['title'] ?? $originalName;
+        $uniqueName = uniqid() . '_' . $originalName;
         $filePath = $this->uploadDir . $uniqueName;
 
         if (!move_uploaded_file($file['tmp_name'], $filePath)) {
@@ -38,7 +39,8 @@ class FileController extends BaseController {
 
         $fileId = $this->fileModel->createFile(
             $_SESSION['user_id'],
-            $fileName,
+            $title,
+            $originalName,
             $uniqueName,
             $fileSize
         );
@@ -47,7 +49,8 @@ class FileController extends BaseController {
             'message' => 'File uploaded successfully',
             'file' => [
                 'id' => $fileId,
-                'name' => $fileName,
+                'name' => $title,
+                'original_name' => $originalName,
                 'size' => $fileSize
             ]
         ]);

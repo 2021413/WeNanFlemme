@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Header from '../components/header/ReturnHeader'
 import '../styles/ConnexionPage.css'
+import { useAuth } from '../context/AuthContext'
 
 function ConnexionPage(){
     const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ function ConnexionPage(){
     });
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleChange = (e) => {
         setFormData({
@@ -28,6 +30,7 @@ function ConnexionPage(){
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: 'include',
                 body: JSON.stringify({
                     email: formData.email,
                     password: formData.password
@@ -40,6 +43,7 @@ function ConnexionPage(){
                 throw new Error(data.error || 'Erreur lors de la connexion');
             }
 
+            login(data);
             navigate('/unlocked-home');
         } catch (err) {
             setError(err.message);

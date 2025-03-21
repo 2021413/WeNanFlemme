@@ -79,9 +79,19 @@ class AuthController extends BaseController {
                 return $this->jsonResponse(['error' => 'Invalid credentials'], 401);
             }
     
+            // Configuration de la session
+            ini_set('session.cookie_httponly', 1);
+            ini_set('session.cookie_secure', 1);
+            ini_set('session.cookie_samesite', 'None');
+            
             session_start();
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['last_activity'] = time();
+            
+            // Régénérer l'ID de session pour prévenir la fixation de session
+            session_regenerate_id(true);
     
             return $this->jsonResponse([
                 'message' => 'Login successful',
@@ -99,7 +109,33 @@ class AuthController extends BaseController {
 
     public function logout() {
         session_start();
+        session_unset();
         session_destroy();
+        
+        // Supprimer le cookie de session
+        if (isset($_COOKIE[session_name()])) {
+            setcookie(session_name(), '', time() - 3600, '/');
+        }
+        
         return $this->jsonResponse(['message' => 'Logout successful']);
+    }
+
+    public function me() {
+        session_start();
+        
+        if (!isset($_SESSION['user_id'])) {
+            return $this->jsonResponse(['error' => 'Not authenticated'], 401);
+        }
+
+        $user = $this->userModel->findById($_SESSION['user_id']);
+        if (!$user) {
+            return $this->jsonResponse(['error' => 'User not found'], 404);
+        }
+
+        return $this->jsonResponse([
+            'id' => $user['id'],
+            'username' => $user['username'],
+            'email' => $user['email']
+        ]);
     }
 }

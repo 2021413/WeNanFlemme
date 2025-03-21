@@ -4,6 +4,7 @@ import UnlockedHomeMain from "../components/Main/UnlockedHomeMain.jsx"
 import Footer from "../components/footer/footer.jsx"
 
 function UnlockedHomePage(){
+
     return(
         <div>
             <CustomHeader />

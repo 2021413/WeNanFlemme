@@ -12,10 +12,11 @@ class File extends BaseModel {
         return $stmt->fetchAll();
     }
 
-    public function createFile($userId, $fileName, $filePath, $fileSize) {
+    public function createFile($userId, $fileName, $originalName, $filePath, $fileSize) {
         return $this->create([
             'user_id' => $userId,
             'file_name' => $fileName,
+            'original_name' => $originalName,
             'file_path' => $filePath,
             'file_size' => $fileSize
         ]);
