@@ -2,30 +2,152 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 375px;
-    height: 50px;
-    background-color: transparent;
-    border: solid;
-    border-color: black;
-    border-radius: 8px;
-    padding: 10px;
-    margin-left: 20px;
-}
-.Folder-Name {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-weight: normal;
-    color: black;
-    padding: auto;
-    margin: 0;
-    margin-bottom: 3px;
+    padding: 15px 20px;
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #f0f0f0;
+    position: relative;
+    z-index: 1;
 }
 
-.Folder-Weight{
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-weight: 100;
-    color: black;
-    opacity: 50%;
+.Card-Folder:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    z-index: 2;
+}
+
+.Folder-Info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+
+.Folder-Name {
     margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.Folder-Weight {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    background: #f8f8f8;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.Menu-Container {
+    position: relative;
+}
+
+.Menu-Button {
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #666;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.Menu-Button:hover {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.Menu-Dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-width: 140px;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.Menu-Item {
+    width: 100%;
+    padding: 10px 16px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    transition: all 0.2s ease;
+}
+
+.Menu-Item:hover {
+    background: #f5f5f5;
+}
+
+.Menu-Item-Delete {
+    color: #dc3545;
+    border-top: 1px solid #eee;
+}
+
+.Menu-Item-Delete:hover {
+    background: #fff5f5;
+}
+
+/* Pour le dernier élément de la liste */
+.Card-Folder:last-child .Menu-Dropdown {
+    top: auto;
+    bottom: 100%;
+}
+
+.Files-Container {
+    width: 100%;
+    padding: 15px;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #d4d4d4 #f5f5f5;
+    padding-top: 60px;
+}
+
+.Files-Container p {
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    color: #666;
+    padding: 20px;
+    margin: 0;
+    border-radius: 12px;
+    background: #f8f8f8;
+}
+
+/* Style de la scrollbar pour Chrome/Safari/Edge */
+.Files-Container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.Files-Container::-webkit-scrollbar-track {
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+.Files-Container::-webkit-scrollbar-thumb {
+    background: #d4d4d4;
+    border-radius: 10px;
+    transition: background 0.2s;
+}
+
+.Files-Container::-webkit-scrollbar-thumb:hover {
+    background: #bebebe;
+}
+
+.Dropdown-Menu-Up {
+    top: auto;
+    bottom: 100%;
+    margin-bottom: 5px;
+    margin-top: 0;
 }

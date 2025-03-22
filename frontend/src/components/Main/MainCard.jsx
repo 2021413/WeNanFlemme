@@ -13,6 +13,7 @@ function MainCard() {
     const [isUploading, setIsUploading] = useState(false)
     const [isExpanded, setIsExpanded] = useState(false)
     const [isHistoryVisible, setIsHistoryVisible] = useState(false)
+    const [refreshTrigger, setRefreshTrigger] = useState(0)
 
     const handleFileUpload = () => {
         fileInputRef.current.click()
@@ -87,6 +88,7 @@ function MainCard() {
                 if (folderInputRef.current) {
                     folderInputRef.current.value = ""
                 }
+                setRefreshTrigger(prev => prev + 1)
             } else {
                 throw new Error("Erreur lors de l'upload")
             }
@@ -170,7 +172,7 @@ function MainCard() {
             <div className="Right-side">
                 <div className={`History ${isHistoryVisible ? 'visible' : ''}`}>
                     <h1 className="Mes-Fichiers">Mes fichiers</h1>
-                    <CardFolder />
+                    <CardFolder refreshTrigger={refreshTrigger} />
                 </div>
                 <img className="chevron" src="../../static/icons/chevron-right.svg" onClick={toggleHistoryVisibility} />
             </div>

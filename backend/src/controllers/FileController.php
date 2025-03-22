@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\File;
+use Exception;
+use DateTime;
 
 class FileController extends BaseController {
     private $fileModel;
@@ -57,32 +59,18 @@ class FileController extends BaseController {
     }
 
     public function createShareLink() {
-        $data = $this->getRequestBody();
+        $data = json_decode(file_get_contents('php://input'), true);
         
-        $rules = [
-            'file_id' => 'required',
-            'expires_at' => 'required'
-        ];
-        
-        $errors = $this->validateRequest($data, $rules);
-        if (!empty($errors)) {
-            return $this->jsonResponse(['errors' => $errors], 400);
-        }
-
-        $file = $this->fileModel->findById($data['file_id']);
-        if (!$file) {
-            return $this->jsonResponse(['error' => 'File not found'], 404);
+        if (!isset($data['file_id']) || !isset($data['expires_at'])) {
+            return $this->jsonResponse(['error' => 'Missing required fields'], 400);
         }
 
         $linkHash = $this->fileModel->createShareLink(
             $data['file_id'],
-            $data['expires_at'],
-            $data['is_protected'] ?? false,
-            $data['password'] ?? null
+            $data['expires_at']
         );
 
         return $this->jsonResponse([
-            'message' => 'Share link created successfully',
             'link' => $linkHash
         ]);
     }

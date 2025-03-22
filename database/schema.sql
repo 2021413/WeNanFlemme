@@ -30,14 +30,3 @@ CREATE TABLE downloads (
     downloaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (file_id) REFERENCES files(id) ON DELETE CASCADE
 );
-
--- Table des liens de partage
-CREATE TABLE share_links (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    file_id INT NOT NULL,
-    link_hash VARCHAR(255) UNIQUE NOT NULL,
-    expires_at DATETIME NOT NULL,
-    is_protected BOOLEAN DEFAULT FALSE,
-    password VARCHAR(255) NULL,
-    FOREIGN KEY (file_id) REFERENCES files(id) ON DELETE CASCADE
-);

@@ -6,6 +6,7 @@ class Download extends BaseModel {
     protected $table = 'downloads';
 
     public function logDownload($fileId, $ipAddress) {
+        error_log("Logging download - File ID: " . $fileId . ", IP: " . $ipAddress);
         return $this->create([
             'file_id' => $fileId,
             'ip_address' => $ipAddress

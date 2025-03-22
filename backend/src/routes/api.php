@@ -19,8 +19,11 @@ class Router {
 
     public function handleRequest($method, $uri) {
         foreach ($this->routes as $route) {
-            if ($route['method'] === $method && $this->matchPath($route['path'], $uri)) {
-                return call_user_func($route['handler']);
+            if ($route['method'] === $method) {
+                $params = $this->matchPath($route['path'], $uri);
+                if ($params !== false) {
+                    return call_user_func_array($route['handler'], $params);
+                }
             }
         }
         
@@ -31,7 +34,12 @@ class Router {
     private function matchPath($routePath, $uri) {
         $routePath = preg_replace('/\/{([^\/]+)}/', '/([^/]+)', $routePath);
         $routePath = str_replace('/', '\/', $routePath);
-        return preg_match('/^' . $routePath . '$/', $uri);
+        $matches = [];
+        if (preg_match('/^' . $routePath . '$/', $uri, $matches)) {
+            array_shift($matches); // Retire la correspondance complète
+            return $matches;
+        }
+        return false;
     }
 }
 
@@ -55,7 +63,7 @@ $router->addRoute('DELETE', '/api/files/{id}', [$fileController, 'delete']);
 $router->addRoute('POST', '/api/files/share', [$fileController, 'createShareLink']);
 
 // Routes de téléchargement
-$router->addRoute('GET', '/api/download/{hash}', [$downloadController, 'downloadFile']);
+$router->addRoute('GET', '/api/files/{id}/download', [$downloadController, 'downloadFile']);
 $router->addRoute('GET', '/api/files/{id}/stats', [$downloadController, 'getStats']);
 
 // Route de santé
@@ -67,6 +75,20 @@ $router->addRoute('GET', '/api/health', function() {
 $method = $_SERVER['REQUEST_METHOD'];
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-$response = $router->handleRequest($method, $uri);
+try {
+    $response = $router->handleRequest($method, $uri);
+} catch (Exception $e) {
+    header("HTTP/1.1 500 Internal Server Error");
+    $response = [
+        'error' => $e->getMessage(),
+        'details' => null
+    ];
+}
+
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: http://localhost:3000'); 
+header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+
 echo json_encode($response);

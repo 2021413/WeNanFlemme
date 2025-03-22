@@ -22,25 +22,23 @@ class File extends BaseModel {
         ]);
     }
 
-    public function createShareLink($fileId, $expiresAt, $isProtected = false, $password = null) {
+    public function createShareLink($fileId, $expiresAt) {
         $linkHash = bin2hex(random_bytes(32));
-        $query = "INSERT INTO share_links (file_id, link_hash, expires_at, is_protected, password) 
-                 VALUES (:file_id, :link_hash, :expires_at, :is_protected, :password)";
+        $query = "INSERT INTO share_links (file_id, link_hash, expires_at) 
+                 VALUES (:file_id, :link_hash, :expires_at)";
         
         $stmt = $this->db->prepare($query);
         $stmt->execute([
             'file_id' => $fileId,
             'link_hash' => $linkHash,
-            'expires_at' => $expiresAt,
-            'is_protected' => $isProtected,
-            'password' => $password ? password_hash($password, PASSWORD_DEFAULT) : null
+            'expires_at' => $expiresAt
         ]);
         
         return $linkHash;
     }
 
     public function findByShareLink($linkHash) {
-        $query = "SELECT f.*, sl.expires_at, sl.is_protected, sl.password 
+        $query = "SELECT f.*, sl.expires_at
                  FROM {$this->table} f 
                  JOIN share_links sl ON f.id = sl.file_id 
                  WHERE sl.link_hash = :link_hash AND sl.expires_at > NOW()";
