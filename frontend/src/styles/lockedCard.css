@@ -1,17 +1,17 @@
 .Card-Overlay {
     position: absolute;
-    top: 26.20%;
+    top: 26.4%;
     left: 120px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 266px;
-    height: 396px;
+    width: 285px;
+    height: 392.5px;
     background-color: #000000;    
     opacity: 90%;
-    border-radius: 16px;
+    border-radius: 15px;
 }
 
 .Lock-img {
