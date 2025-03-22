@@ -1,0 +1,31 @@
+.Card-Folder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 375px;
+    height: 50px;
+    background-color: transparent;
+    border: solid;
+    border-color: black;
+    border-radius: 8px;
+    padding: 10px;
+    margin-left: 20px;
+}
+.Folder-Name {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    color: black;
+    padding: auto;
+    margin: 0;
+    margin-bottom: 3px;
+}
+
+.Folder-Weight{
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 100;
+    color: black;
+    opacity: 50%;
+    margin: 0;
+}

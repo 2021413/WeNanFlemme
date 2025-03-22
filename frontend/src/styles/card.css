@@ -1,14 +1,25 @@
 .Card {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    width: 250px;
-    height: 380px;
     background-color: #FFFFFF;
     border-radius: 16px;
     padding: 8px;
     margin-left: 100px;
     margin-right: 150px;
+    transition: all 0.5s;
+}
+
+.Card.expanded {
+    width: 600px;
+}
+
+.Left-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .Importation-buttons {
@@ -106,4 +117,40 @@
     font-family: 'Inter', sans-serif;
     font-size: 12px;
     cursor: pointer;
+}
+
+.Right-side {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.5s;
+    margin-left: auto;
+    height: 375px;
+    position: relative;
+}
+
+.Mes-Fichiers {
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-weight: normal;
+
+}
+
+.History {
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    transition: max-height 0.5s ease;
+    overflow: hidden;
+}
+
+.History.visible {
+    display: flex;
+    max-height: 500px;
+}
+
+.Opener {
+    height: 100%;
 }

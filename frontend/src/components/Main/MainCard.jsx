@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react"
 import "../../styles/card.css"
+import CardFolder from "./CardFolder"
 
 function MainCard() {
     const fileInputRef = useRef(null)
@@ -7,6 +8,8 @@ function MainCard() {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [isUploading, setIsUploading] = useState(false)
+    const [isExpanded, setIsExpanded] = useState(false)
+    const [isHistoryVisible, setIsHistoryVisible] = useState(false)
 
     const handleFileUpload = () => {
         fileInputRef.current.click()
@@ -64,59 +67,72 @@ function MainCard() {
         }
     }
 
+    const toggleHistoryVisibility = () => {
+        setIsHistoryVisible(!isHistoryVisible)
+    }
+
     return(
         <div className="Card">
-            <div className="Importation-buttons">
-                <button className="File" onClick={handleFileUpload} disabled={isUploading}>
-                    <input 
-                        type="file" 
-                        className="File-Button" 
-                        ref={fileInputRef} 
-                        style={{ display: 'none' }} 
-                        onChange={handleFileChange}
-                    />
-                    <img src="../../static/icons/Plus-icon.svg" className="Importation-buttons-icons"/>
-                    <p className="Importation-buttons-text">
-                        {file ? file.name : "Ajouter un fichier"}
-                    </p>
-                </button>
-                <button className="Folder" disabled={isUploading}>
-                    <img src="../../static/icons/Folder-icon.svg" className="Importation-buttons-icons"/>
-                    <p className="Importation-buttons-text">Ajouter un dossier</p>
+            <div className="Left-side">
+                <div className="Importation-buttons">
+                    <button className="File" onClick={handleFileUpload} disabled={isUploading}>
+                        <input 
+                            type="file" 
+                            className="File-Button" 
+                            ref={fileInputRef} 
+                            style={{ display: 'none' }} 
+                            onChange={handleFileChange}
+                        />
+                        <img src="../../static/icons/Plus-icon.svg" className="Importation-buttons-icons"/>
+                        <p className="Importation-buttons-text">
+                            {file ? file.name : "Ajouter un fichier"}
+                        </p>
+                    </button>
+                    <button className="Folder" disabled={isUploading}>
+                        <img src="../../static/icons/Folder-icon.svg" className="Importation-buttons-icons"/>
+                        <p className="Importation-buttons-text">Ajouter un dossier</p>
+                    </button>
+                </div>
+                <p className="Maximum-size">jusqu'à 20Mo</p>
+                <form className="Form" onSubmit={(e) => e.preventDefault()}>
+                    <div className="form-group">
+                        <label htmlFor="titre" className="Titre">Titre</label>
+                        <input 
+                            className="Input-titre"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            disabled={isUploading}
+                        />
+                        <div className="Bar"></div>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="description" className="Description">Description</label>
+                        <textarea 
+                            className="Input-description"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            disabled={isUploading}
+                        />
+                        <div className="Bar"></div>
+                    </div>
+                </form>
+                <button 
+                    className="Convert-button" 
+                    onClick={handleSubmit}
+                    disabled={isUploading}
+                >
+                    <h3 className="Convert-button-text">
+                        {isUploading ? "Upload en cours..." : "Obtenir un lien"}
+                    </h3>
                 </button>
             </div>
-            <p className="Maximum-size">jusqu'à 20Mo</p>
-            <form className="Form" onSubmit={(e) => e.preventDefault()}>
-                <div className="form-group">
-                    <label htmlFor="titre" className="Titre">Titre</label>
-                    <input 
-                        className="Input-titre"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        disabled={isUploading}
-                    />
-                    <div className="Bar"></div>
+            <div className="Right-side">
+                <div className={`History ${isHistoryVisible ? 'visible' : ''}`}>
+                    <h1 className="Mes-Fichiers">Mes fichiers</h1>
+                    <CardFolder />
                 </div>
-                <div className="form-group">
-                    <label htmlFor="description" className="Description">Description</label>
-                    <textarea 
-                        className="Input-description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        disabled={isUploading}
-                    />
-                    <div className="Bar"></div>
-                </div>
-            </form>
-            <button 
-                className="Convert-button" 
-                onClick={handleSubmit}
-                disabled={isUploading}
-            >
-                <h3 className="Convert-button-text">
-                    {isUploading ? "Upload en cours..." : "Obtenir un lien"}
-                </h3>
-            </button>
+                <img className="chevron" src="../../static/icons/chevron-right.svg" onClick={toggleHistoryVisibility} />
+            </div>
         </div>
     )
 }
