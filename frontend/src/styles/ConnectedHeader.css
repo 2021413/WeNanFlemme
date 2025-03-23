@@ -11,6 +11,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    user-select: none;
 }
 
 .header {
@@ -22,8 +23,9 @@
     background-color: #FFFFFF;
     padding: 10px;
     border-radius: 5px;
-    transition: all 0.3s ease;
     position: relative;
+    transition: background-color 0.3s ease;
+    user-select: none;
 }
 
 .WNF-Title {
@@ -59,10 +61,15 @@ h1 {
     border-radius: 0 0 5px 5px;
     z-index: 10;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    user-select: none;
 }
 
 .dropdown.open {
     display: flex;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .button-container {
@@ -78,6 +85,8 @@ h1 {
     padding: 10px;
     width: 100%;
     text-align: center;
+    user-select: none;
+    cursor: pointer;
 }
 
 .disconnect {
@@ -89,4 +98,10 @@ h1 {
     height: 1px;
     background-color: #000;
     margin: 5px 0;
+}
+
+.header.open {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    transition: none;
 } 

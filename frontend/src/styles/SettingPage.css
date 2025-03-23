@@ -92,3 +92,34 @@
 .settings-page__submit-button--last {
     margin-bottom: 150px;
 }
+
+/* Styles pour les messages d'erreur */
+.settings-page__error-message {
+    color: #ff4d4d;
+    font-size: 14px;
+    margin-top: 5px;
+    font-family: 'Inter', sans-serif;
+}
+
+.settings-page__input--error {
+    border-color: #ff4d4d;
+}
+
+/* Animation pour mettre en évidence les erreurs */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.settings-page__input--animated-error {
+    animation: shake 0.6s ease;
+    border-color: #ff4d4d;
+}
+
+/* Style pour désactiver le bouton d'envoi si erreur */
+.settings-page__submit-button--disabled {
+    background-color: #8b93c9;
+    cursor: not-allowed;
+    opacity: 0.7;
+}

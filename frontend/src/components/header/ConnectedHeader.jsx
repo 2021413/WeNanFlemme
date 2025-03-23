@@ -36,7 +36,7 @@ function ConnectedHeader() {
     return (
         <div className="Header-bar">
             <div className="WNF-Title">WNF</div>
-            <div className="header" onClick={toggleDropdown}>
+            <div className={`header ${isOpen ? "open" : ""}`} onClick={toggleDropdown}>
                 <div className="header-title-and-icon">
                     <h1>{user?.email || 'Utilisateur'}</h1>
                     <img src="../../static/icons/chevron-right.svg"/>
