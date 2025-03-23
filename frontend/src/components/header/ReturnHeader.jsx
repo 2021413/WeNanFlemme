@@ -1,14 +1,20 @@
 import React from "react"
 import '../../styles/ReturnHeader.css'
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 function ReturnHeader(){
+    const navigate = useNavigate();
+    
+    const handleReturn = () => {
+        navigate(-1); // Retourne à la page précédente
+    };
+    
     return(
         <div className="Header">
-            <Link to="/" className="Connexion-button">
+            <div onClick={handleReturn} className="Connexion-button">
                 <img src="<../../../static/icons/chevron-left.svg" className="Chevron"/>
                 <p className="Return">Retour</p>
-            </Link>
+            </div>
         </div>
     )
 }

@@ -28,6 +28,11 @@ function ConnectedHeader() {
         }
     }
 
+    const handleSettings = () => {
+        navigate('/compte');
+        setIsOpen(false); // Fermer le menu après navigation
+    }
+
     return (
         <div className="Header-bar">
             <div className="WNF-Title">WNF</div>
@@ -39,7 +44,7 @@ function ConnectedHeader() {
                 <div className={`dropdown ${isOpen ? "open" : ""}`}>
                     <div className="button-container">
                         <div className="separator"></div>
-                        <button className="button">Paramètres</button>
+                        <button className="button" onClick={handleSettings}>Paramètres</button>
                         <div className="separator"></div>
                         <button className="button disconnect" onClick={handleLogout}>Se déconnecter</button>
                     </div>

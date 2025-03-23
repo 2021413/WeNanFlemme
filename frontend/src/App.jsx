@@ -20,7 +20,10 @@ function App() {
             path="/unlocked-home" 
             element={<PrivateRoute element={<UnlockedHomePage />} />} 
           />
-          <Route path='/compte' element={<SettingPage />}/>
+          <Route 
+            path='/compte' 
+            element={<PrivateRoute element={<SettingPage />} />}
+          />
         </Routes>
       </Router>
     </AuthProvider>
