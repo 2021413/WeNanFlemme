@@ -65,7 +65,7 @@ Application web permettant de gérer, uploader, télécharger et sécuriser des 
 │   └── vite.config.js
 │
 └── README.md                      # Ce fichier
-
+```
 ## ⚙️ Installation
 
 1. **Cloner le projet**
@@ -162,5 +162,3 @@ npm run preview
 - Node.js ≥ 16
 - npm ≥ 8
 ```
-
-Ce fichier README fournit une vue d'ensemble complète de votre projet, y compris les étapes nécessaires pour l'installation et l'utilisation.
