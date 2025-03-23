@@ -161,4 +161,3 @@ npm run preview
 - Apache ou Nginx (avec `mod_rewrite` activé)
 - Node.js ≥ 16
 - npm ≥ 8
-```
