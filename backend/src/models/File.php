@@ -2,9 +2,21 @@
 
 namespace App\Models;
 
+/**
+ * Modèle pour la gestion des fichiers
+ */
 class File extends BaseModel {
+    /**
+     * Nom de la table dans la base de données
+     */
     protected $table = 'files';
 
+    /**
+     * Recherche tous les fichiers appartenant à un utilisateur
+     *
+     * @param int $userId ID de l'utilisateur
+     * @return array Tableau des fichiers de l'utilisateur
+     */
     public function findByUserId($userId) {
         $query = "SELECT * FROM {$this->table} WHERE user_id = :user_id";
         $stmt = $this->db->prepare($query);
@@ -12,6 +24,12 @@ class File extends BaseModel {
         return $stmt->fetchAll();
     }
 
+    /**
+     * Recherche tous les fichiers partagés avec un utilisateur
+     *
+     * @param int $userId ID de l'utilisateur
+     * @return array Tableau des fichiers partagés avec l'utilisateur
+     */
     public function findSharedWithUser($userId) {
         $query = "SELECT f.*, u.username as shared_by, 1 as is_shared 
                  FROM {$this->table} f 
@@ -23,6 +41,13 @@ class File extends BaseModel {
         return $stmt->fetchAll();
     }
 
+    /**
+     * Récupère tous les fichiers liés à un utilisateur (personnels et partagés)
+     *
+     * @param int $userId ID de l'utilisateur
+     * @param bool $includeShared Inclure les fichiers partagés
+     * @return array Tableau des fichiers
+     */
     public function findAllUserFiles($userId, $includeShared = false) {
         // Si on n'inclut pas les fichiers partagés, retourner juste les fichiers de l'utilisateur
         if (!$includeShared) {
@@ -36,6 +61,16 @@ class File extends BaseModel {
         return array_merge($personalFiles, $sharedFiles);
     }
 
+    /**
+     * Crée un nouveau fichier dans la base de données
+     *
+     * @param int $userId ID de l'utilisateur propriétaire
+     * @param string $fileName Nom du fichier affiché à l'utilisateur
+     * @param string $originalName Nom original du fichier uploadé
+     * @param string $filePath Chemin sur le serveur où le fichier est stocké
+     * @param int $fileSize Taille du fichier en octets
+     * @return int ID du fichier créé
+     */
     public function createFile($userId, $fileName, $originalName, $filePath, $fileSize) {
         return $this->create([
             'user_id' => $userId,
@@ -46,6 +81,13 @@ class File extends BaseModel {
         ]);
     }
 
+    /**
+     * Crée un lien de partage pour un fichier
+     *
+     * @param int $fileId ID du fichier
+     * @param string $expiresAt Date d'expiration du lien
+     * @return string Hash unique du lien de partage
+     */
     public function createShareLink($fileId, $expiresAt) {
         $linkHash = bin2hex(random_bytes(32));
         $query = "INSERT INTO share_links (file_id, link_hash, expires_at) 
@@ -61,6 +103,12 @@ class File extends BaseModel {
         return $linkHash;
     }
 
+    /**
+     * Recherche un fichier par son lien de partage
+     *
+     * @param string $linkHash Hash du lien de partage
+     * @return array|bool Les données du fichier ou false
+     */
     public function findByShareLink($linkHash) {
         $query = "SELECT f.*, sl.expires_at
                  FROM {$this->table} f 
@@ -72,6 +120,13 @@ class File extends BaseModel {
         return $stmt->fetch();
     }
 
+    /**
+     * Partage un fichier avec un autre utilisateur
+     *
+     * @param int $fileId ID du fichier à partager
+     * @param string $username Nom d'utilisateur du destinataire
+     * @return bool Succès ou échec du partage
+     */
     public function shareFileWithUser($fileId, $username) {
         try {
             // D'abord, créer la table shared_files si elle n'existe pas
