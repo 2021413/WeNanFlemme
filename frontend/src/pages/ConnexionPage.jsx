@@ -5,7 +5,7 @@ import '../styles/ConnexionPage.css'
 import { useAuth } from '../context/AuthContext'
 import axios from 'axios'
 
-function ConnexionPage(){
+function ConnexionPage() {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -30,7 +30,6 @@ function ConnexionPage(){
         setLoginSuccess(false);
 
         try {
-            // Utiliser axios comme dans SettingPage
             const response = await axios.post(
                 'http://localhost:8000/api/auth/login',
                 {
@@ -40,33 +39,21 @@ function ConnexionPage(){
                 { withCredentials: true }
             );
 
-            // IMPORTANT: Extraire spécifiquement l'utilisateur, comme dans SettingPage
-            // Dans SettingPage: const updatedUser = response.data.user;
             const userData = response.data.user || response.data;
             
-            // Stocker le token séparément dans localStorage s'il existe
             if (response.data.token) {
                 localStorage.setItem('authToken', response.data.token);
             }
             
-            // Mettre à jour le contexte d'authentification avec UNIQUEMENT les données utilisateur
-            // comme dans SettingPage : login(updatedUser);
             login(userData);
-            
-            // Console log pour déboguer
-            console.log('Utilisateur connecté:', userData);
-            
-            // Indiquer que la connexion a réussi
             setLoginSuccess(true);
             
-            // Attendre plus longtemps que le contexte soit mis à jour avant de rediriger (2 secondes)
             setTimeout(() => {
                 setLoading(false);
                 navigate('/unlocked-home');
-            }, 1000);
+            }, 500);
         } catch (error) {
             setLoading(false);
-            console.error('Erreur de connexion:', error);
             const errorMessage = error.response?.data?.error || 'Erreur lors de la connexion';
             setError(errorMessage);
         }
@@ -84,7 +71,7 @@ function ConnexionPage(){
                 <div className="Form">
                     <form onSubmit={handleSubmit}>
                         {error && <div className="error-message">{error}</div>}
-                        {loginSuccess && <div style={{color: 'green', marginBottom: '10px'}}>Connexion réussie! Redirection...</div>}
+                        {loginSuccess && <div style={{color: 'green', marginBottom: '10px'}}>Connexion réussie !</div>}
                         <ul>
                             <li>
                                 <input 

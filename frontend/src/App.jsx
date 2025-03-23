@@ -6,7 +6,7 @@ import InscriptionPage from './pages/InscriptionPage'
 import ConnexionPage from './pages/ConnexionPage'
 import SettingPage from './pages/SettingPage.jsx'
 import { AuthProvider } from './context/AuthContext'
-import PrivateRoute from './components/PrivateRoute.jsx'
+import PrivateRoute from './config/PrivateRoute.jsx'
 
 function App() {
   return (
