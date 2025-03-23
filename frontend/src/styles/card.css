@@ -1,4 +1,4 @@
-.Card {
+.main-card {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -11,25 +11,25 @@
     transition: all 0.5s;
 }
 
-.Card.expanded {
+.main-card--expanded {
     width: 600px;
 }
 
-.Left-side {
+.main-card__left-side {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.Importation-buttons {
+.main-card__import-buttons {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
 }
 
-.File, .Folder {
+.main-card__file-button, .main-card__folder-button {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -42,62 +42,60 @@
     cursor: pointer;
 }
 
-
-.File:hover, .Folder:hover {
+.main-card__file-button:hover, .main-card__folder-button:hover {
     background-color: #C4D6FF;
 }
 
-.Importation-buttons-text {
+.main-card__button-text {
     font-family: 'Inter', sans-serif;
     font-size: 12px;
 }
 
-.Importation-buttons-icons {
+.main-card__button-icon {
     width: 24px;
     height: 24px;
     transform: translateY(30%);
 }
 
-.Maximum-size {
+.main-card__max-size {
     font-family: 'Inter', sans-serif;
     font-size: 10px;
-    color: rgb(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.5);
     padding-right: 60%;
 }
 
-.form-group {
+.main-card__form-group {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
 }
 
-.Titre {
+.main-card__title-label {
     font-family: 'Inter', sans-serif;
     font-size: 14px;
-    color: rgb(0, 0, 0, 0.5);
-    /* transform: translate(-25%); */
+    color: rgba(0, 0, 0, 0.5);
 }
 
-.Description {
+.main-card__description-label {
     font-family: 'Inter', sans-serif;
     font-size: 14px;
-    color: rgb(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.5);
 }
 
-.Input-titre {
+.main-card__title-input {
     width: 80%;
     height: 25px;
     border: none;
 }
 
-.Input-description {
+.main-card__description-input {
     width: 80%;
     height: 100px;
     border: none;
 }
 
-.Bar {
+.main-card__divider {
     width: 225px;
     height: 1px;
     background-color: #000000;
@@ -105,7 +103,7 @@
     margin-bottom: 25px;
 }
 
-.Convert-button {
+.main-card__convert-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -119,7 +117,7 @@
     cursor: pointer;
 }
 
-.Right-side {
+.main-card__right-side {
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -129,14 +127,13 @@
     position: relative;
 }
 
-.Mes-Fichiers {
+.main-card__files-title {
     font-family: 'Inter', sans-serif;
     font-size: 22px;
     font-weight: normal;
-
 }
 
-.History {
+.main-card__history {
     display: none;
     flex-direction: column;
     justify-content: flex-start;
@@ -146,11 +143,11 @@
     overflow: hidden;
 }
 
-.History.visible {
+.main-card__history--visible {
     display: flex;
     max-height: 500px;
 }
 
-.Opener {
+.main-card__opener {
     height: 100%;
 }

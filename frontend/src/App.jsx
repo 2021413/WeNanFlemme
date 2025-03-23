@@ -4,6 +4,7 @@ import LockedHomePage from './pages/LockedHomePage'
 import UnlockedHomePage from './pages/UnlockedHomePage'
 import InscriptionPage from './pages/InscriptionPage'
 import ConnexionPage from './pages/ConnexionPage'
+import SettingPage from './pages/SettingPage.jsx'
 import { AuthProvider } from './context/AuthContext'
 import PrivateRoute from './components/PrivateRoute.jsx'
 
@@ -19,6 +20,7 @@ function App() {
             path="/unlocked-home" 
             element={<PrivateRoute element={<UnlockedHomePage />} />} 
           />
+          <Route path='/compte' element={<SettingPage />}/>
         </Routes>
       </Router>
     </AuthProvider>

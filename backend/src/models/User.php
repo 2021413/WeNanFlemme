@@ -31,4 +31,23 @@ class User extends BaseModel {
     public function verifyPassword($password_hash, $password) {
         return password_verify($password, $password_hash);
     }
+
+    public function updateProfile($userId, $username, $email) {
+        $query = "UPDATE {$this->table} SET username = :username, email = :email WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        return $stmt->execute([
+            'id' => $userId,
+            'username' => $username,
+            'email' => $email
+        ]);
+    }
+
+    public function updatePassword($userId, $newPasswordHash) {
+        $query = "UPDATE {$this->table} SET password_hash = :password_hash WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        return $stmt->execute([
+            'id' => $userId,
+            'password_hash' => $newPasswordHash
+        ]);
+    }
 }

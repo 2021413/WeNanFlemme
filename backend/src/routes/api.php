@@ -55,6 +55,9 @@ $router = new Router();
 $router->addRoute('POST', '/api/auth/register', [$authController, 'register']);
 $router->addRoute('POST', '/api/auth/login', [$authController, 'login']);
 $router->addRoute('POST', '/api/auth/logout', [$authController, 'logout']);
+$router->addRoute('GET', '/api/auth/me', [$authController, 'me']);
+$router->addRoute('PUT', '/api/auth/profile', [$authController, 'updateProfile']);
+$router->addRoute('PUT', '/api/auth/password', [$authController, 'updatePassword']);
 
 // Routes de gestion des fichiers
 $router->addRoute('POST', '/api/files/upload', [$fileController, 'upload']);

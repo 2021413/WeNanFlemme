@@ -104,23 +104,22 @@ function MainCard() {
     }
 
     return(
-        <div className="Card">
-            <div className="Left-side">
-                <div className="Importation-buttons">
-                    <button className="File" onClick={handleFileUpload} disabled={isUploading}>
+        <div className="main-card">
+            <div className="main-card__left-side">
+                <div className="main-card__import-buttons">
+                    <button className="main-card__file-button" onClick={handleFileUpload} disabled={isUploading}>
                         <input 
                             type="file" 
-                            className="File-Button" 
                             ref={fileInputRef} 
                             style={{ display: 'none' }} 
                             onChange={handleFileChange}
                         />
-                        <img src="../../static/icons/Plus-icon.svg" className="Importation-buttons-icons"/>
-                        <p className="Importation-buttons-text">
+                        <img src="../../static/icons/Plus-icon.svg" className="main-card__button-icon"/>
+                        <p className="main-card__button-text">
                             {file ? file.name : "Ajouter un fichier"}
                         </p>
                     </button>
-                    <button className="Folder" onClick={handleFolderClick} disabled={isUploading}>
+                    <button className="main-card__folder-button" onClick={handleFolderClick} disabled={isUploading}>
                         <input 
                             type="file"
                             ref={folderInputRef}
@@ -130,51 +129,51 @@ function MainCard() {
                             style={{ display: 'none' }}
                             onChange={handleFolderUpload}
                         />
-                        <img src="../../static/icons/Folder-icon.svg" className="Importation-buttons-icons"/>
-                        <p className="Importation-buttons-text">
+                        <img src="../../static/icons/Folder-icon.svg" className="main-card__button-icon"/>
+                        <p className="main-card__button-text">
                             {folder ? folder.name : "Ajouter un dossier"}
                         </p>
                     </button>
                 </div>
-                <p className="Maximum-size">jusqu'à 20Mo</p>
-                <form className="Form" onSubmit={(e) => e.preventDefault()}>
-                    <div className="form-group">
-                        <label htmlFor="titre" className="Titre">Titre</label>
+                <p className="main-card__max-size">jusqu'à 20Mo</p>
+                <form className="main-card__form" onSubmit={(e) => e.preventDefault()}>
+                    <div className="main-card__form-group">
+                        <label htmlFor="titre" className="main-card__title-label">Titre</label>
                         <input 
-                            className="Input-titre"
+                            className="main-card__title-input"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             disabled={isUploading}
                         />
-                        <div className="Bar"></div>
+                        <div className="main-card__divider"></div>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="description" className="Description">Description</label>
+                    <div className="main-card__form-group">
+                        <label htmlFor="description" className="main-card__description-label">Description</label>
                         <textarea 
-                            className="Input-description"
+                            className="main-card__description-input"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             disabled={isUploading}
                         />
-                        <div className="Bar"></div>
+                        <div className="main-card__divider"></div>
                     </div>
                 </form>
                 <button 
-                    className="Convert-button" 
+                    className="main-card__convert-button" 
                     onClick={handleSubmit}
                     disabled={isUploading}
                 >
-                    <h3 className="Convert-button-text">
+                    <h3 className="main-card__button-text">
                         {isUploading ? "Upload en cours..." : "Obtenir un lien"}
                     </h3>
                 </button>
             </div>
-            <div className="Right-side">
-                <div className={`History ${isHistoryVisible ? 'visible' : ''}`}>
-                    <h1 className="Mes-Fichiers">Mes fichiers</h1>
+            <div className="main-card__right-side">
+                <div className={`main-card__history ${isHistoryVisible ? 'main-card__history--visible' : ''}`}>
+                    <h1 className="main-card__files-title">Mes fichiers</h1>
                     <CardFolder refreshTrigger={refreshTrigger} />
                 </div>
-                <img className="chevron" src="../../static/icons/chevron-right.svg" onClick={toggleHistoryVisibility} />
+                <img className="main-card__chevron" src="../../static/icons/chevron-right.svg" onClick={toggleHistoryVisibility} />
             </div>
         </div>
     )
