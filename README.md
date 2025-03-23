@@ -1,4 +1,4 @@
-# 🔐 File Vault - Gestionnaire de Fichiers Sécurisé
+# 🔐 WeNanFlemme - Gestionnaire de Fichiers Sécurisé
 
 Application web permettant de gérer, uploader, télécharger et sécuriser des fichiers à travers une interface moderne avec authentification.
 
@@ -68,8 +68,8 @@ Application web permettant de gérer, uploader, télécharger et sécuriser des 
 1. **Cloner le projet**
 
    ```bash
-   git clone https://github.com/ton-utilisateur/file-vault.git
-   cd file-vault
+   git clone https://github.com/2021413/WeNanFlemme.git
+   cd WeNanFlemme
    ```
 
 ### Configuration du Backend
@@ -96,6 +96,10 @@ Vérifiez le fichier `cors.php` si nécessaire pour autoriser votre frontend.
 
 Pointez votre serveur Apache/Nginx vers le dossier `backend/public`.
 
+```bash
+php -S localhost:8000
+```
+
 Assurez-vous que `mod_rewrite` est activé sur Apache (ou équivalent sur Nginx) pour gérer le routage via `index.php`.
 
 ### Installation & Lancement du Frontend
@@ -112,7 +116,7 @@ npm run dev
 
 Une fois l'application installée :
 
-1. Rendez-vous sur [http://localhost:5173]
+1. Rendez-vous sur [http://localhost:3000]
 2. Créez un compte via la page `/inscription`
 3. Connectez-vous via la page `/connexion`
 4. Accédez aux fonctionnalités suivantes :
