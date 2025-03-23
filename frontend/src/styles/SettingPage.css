@@ -1,0 +1,136 @@
+.settings-page {
+    padding-left: 0;
+    padding-top: 25px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.settings-page__username {
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: normal;
+    color: #ADADAD;
+}
+
+.settings-page__title {
+    font-family: 'Inter', sans-serif;
+    font-size: 45px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.settings-page__divider {
+    background-color: rgb(255, 255, 255);
+    width: 800px;
+    height: 1px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    align-self: center;
+}
+
+.settings-page__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.settings-page__form-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 35px;
+    font-weight: normal;
+    color: #ffffff;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.settings-page__form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.settings-page__input {
+    width: 500px;
+    height: 75px;
+    border: solid;
+    border-color: rgb(255, 255, 255);
+    background-color: transparent;
+    border-radius: 12px;
+    color: white;
+}
+
+.settings-page__submit-button {
+    align-self: flex-end;
+    width: 230px;
+    height: 55px;
+    border: none;
+    background-color: #3B57E6;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+}
+
+.settings-page__input[type=password]{
+    font-size: 16px;
+    padding-left: 50px;
+    color: #606060;
+}
+
+.settings-page__input[type=text]{
+    font-size: 16px;
+    padding-left: 50px;
+    color: #ffffff;
+}
+
+.settings-page__input[type=email]{
+    font-size: 16px;
+    padding-left: 50px;
+    color: #ffffff;
+}
+
+.settings-page__submit-button--last {
+    margin-bottom: 150px;
+}
+
+/* Styles pour les messages d'erreur */
+.settings-page__error-message {
+    color: #ff4d4d;
+    font-size: 14px;
+    margin-top: 5px;
+    font-family: 'Inter', sans-serif;
+}
+
+.settings-page__input--error {
+    border-color: #ff4d4d;
+}
+
+/* Animation pour mettre en évidence les erreurs */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.settings-page__input--animated-error {
+    animation: shake 0.6s ease;
+    border-color: #ff4d4d;
+}
+
+/* Style pour désactiver le bouton d'envoi si erreur */
+.settings-page__submit-button--disabled {
+    background-color: #8b93c9;
+    cursor: not-allowed;
+    opacity: 0.7;
+}

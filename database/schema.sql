@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS wetransfer_clone;
-USE wetransfer_clone;
+CREATE DATABASE IF NOT EXISTS WeNanFlemme;
+USE WeNanFlemme;
 
 -- Table des utilisateurs
 CREATE TABLE users (
@@ -15,6 +15,7 @@ CREATE TABLE files (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     file_name VARCHAR(255) NOT NULL,
+    original_name VARCHAR(255) NOT NULL,
     file_path VARCHAR(255) NOT NULL,
     file_size INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -30,13 +31,10 @@ CREATE TABLE downloads (
     FOREIGN KEY (file_id) REFERENCES files(id) ON DELETE CASCADE
 );
 
--- Table des liens de partage
-CREATE TABLE share_links (
+CREATE TABLE shared_files (
     id INT AUTO_INCREMENT PRIMARY KEY,
     file_id INT NOT NULL,
-    link_hash VARCHAR(255) UNIQUE NOT NULL,
-    expires_at DATETIME NOT NULL,
-    is_protected BOOLEAN DEFAULT FALSE,
-    password VARCHAR(255) NULL,
-    FOREIGN KEY (file_id) REFERENCES files(id) ON DELETE CASCADE
+    recipient_id INT NOT NULL,
+    shared_at DATETIME NOT NULL,
+    UNIQUE KEY (file_id, recipient_id)
 );

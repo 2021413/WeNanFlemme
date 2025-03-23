@@ -1,12 +1,33 @@
-import React from 'react';
+import React from 'react'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
+import LockedHomePage from './pages/LockedHomePage'
+import UnlockedHomePage from './pages/UnlockedHomePage'
+import InscriptionPage from './pages/InscriptionPage'
+import ConnexionPage from './pages/ConnexionPage'
+import SettingPage from './pages/SettingPage.jsx'
+import { AuthProvider } from './context/AuthContext'
+import PrivateRoute from './config/PrivateRoute.jsx'
 
 function App() {
   return (
-    <div>
-      <h1>Mon Application React</h1>
-      <p>Bienvenue sur ma page d'accueil</p>
-    </div>
-  );
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LockedHomePage />} />
+          <Route path="/inscription" element={<InscriptionPage />} />
+          <Route path="/connexion" element={<ConnexionPage />} />
+          <Route 
+            path="/unlocked-home" 
+            element={<PrivateRoute element={<UnlockedHomePage />} />} 
+          />
+          <Route 
+            path='/compte' 
+            element={<PrivateRoute element={<SettingPage />} />}
+          />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  )
 }
 
-export default App;
+export default App

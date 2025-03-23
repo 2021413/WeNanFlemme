@@ -1,0 +1,24 @@
+.Header {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    width: min-content;
+}
+
+.Chevron {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+}
+
+.Return {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: white;
+}

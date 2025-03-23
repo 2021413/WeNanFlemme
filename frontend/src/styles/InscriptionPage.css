@@ -1,0 +1,174 @@
+@font-face {
+    font-family: 'Luckiest Guy';
+    src: url('../static/fonts/Luckiest_Guy/LuckiestGuy-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.Main-Indentifier {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    text-align: center;
+    gap: 50px;
+    padding: 0;
+    margin: 0;
+}
+
+.Main-Title {
+    color: white;
+    font-family: 'Luckiest Guy';
+    font-size: 40px;
+    letter-spacing: 1px;
+    cursor: default;
+    padding: 0;
+    margin: 0;
+}
+
+.Subtitle {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: default;
+    padding: 0;
+    margin: 0;
+}
+
+.Welcome-Title {
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    cursor: default;
+    padding: 0;
+    margin: 0;
+}
+
+.Inustructions {
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 100;
+    height: min-content;
+    width: 350px;
+    cursor: default;
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+li {
+    padding-bottom: 15px;
+}
+
+.Text-Input {
+    width: 500px;
+    height: 75px;
+    background-color: transparent;
+    border: solid;
+    border-color: #606060;
+    border-radius: 24px;
+}
+
+.Text-Input[type=text], .Text-Input[type=email] {
+    font-size: 16px;
+    padding-left: 50px;
+    color: white;
+}
+
+.Password-Input {
+    width: 500px;
+    height: 75px;
+    background-color: transparent;
+    border: solid;
+    border-color: #606060;
+    border-radius: 24px;
+}
+
+.Password-Input[type=password]{
+    font-size: 16px;
+    padding-left: 50px;
+    color: #606060;
+}
+
+.Submit-Button {
+    width: 550px;
+    height: 60px;
+    background-color: #3B57E6;
+    border-radius: 15px;
+    color: white;
+}
+
+.Text-switch {
+    margin-top: 20px;
+    text-align: center;
+    color: #666;
+}
+
+.Switch-wrapper {
+    margin-left: 5px;
+}
+
+.Switch-link {
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.Switch-link:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: #ff4444;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: rgba(255, 68, 68, 0.1);
+    border-radius: 15px;
+    width: 500px;
+    text-align: center;
+}
+
+.success-message {
+    color: #4CAF50;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: rgba(76, 175, 80, 0.1);
+    border-radius: 15px;
+    width: 500px;
+    text-align: center;
+}
+
+.error-message {
+    color: #ff4444;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: rgba(255, 68, 68, 0.1);
+    border-radius: 15px;
+    width: 500px;
+    text-align: center;
+}
+
+.success-message {
+    color: #4CAF50;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: rgba(76, 175, 80, 0.1);
+    border-radius: 15px;
+    width: 500px;
+    text-align: center;
+}
