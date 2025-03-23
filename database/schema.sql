@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS wetransfer_clone;
-USE wetransfer_clone;
+CREATE DATABASE IF NOT EXISTS WeNanFlemme;
+USE WeNanFlemme;
 
 -- Table des utilisateurs
 CREATE TABLE users (
@@ -29,4 +29,12 @@ CREATE TABLE downloads (
     ip_address VARCHAR(45) NOT NULL,
     downloaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (file_id) REFERENCES files(id) ON DELETE CASCADE
+);
+
+CREATE TABLE shared_files (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    file_id INT NOT NULL,
+    recipient_id INT NOT NULL,
+    shared_at DATETIME NOT NULL,
+    UNIQUE KEY (file_id, recipient_id)
 );

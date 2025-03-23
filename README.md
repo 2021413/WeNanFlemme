@@ -6,12 +6,15 @@ Application web permettant de gérer, uploader, télécharger et sécuriser des 
 
 - Authentification (connexion / inscription)
 - Upload & téléchargement de fichiers
-- Pages d’accueil avec contenu verrouillé/déverrouillé
+- Pages d'accueil avec contenu verrouillé/déverrouillé
 - Interface responsive en React
 - API REST sécurisée en PHP
-- Gestion d’autorisations & rôles utilisateurs
+- Gestion d'autorisations & rôles utilisateurs
 - Architecture MVC côté backend
 - Stockage local des fichiers
+- **Partage de fichiers entre utilisateurs**
+- **Génération de liens de partage publics**
+- **Gestion des fichiers partagés avec vous**
 
 ## 🛠 Technologies
 
@@ -51,7 +54,7 @@ Application web permettant de gérer, uploader, télécharger et sécuriser des 
 │   ├── index.html                 # Fichier HTML principal
 │   ├── src/
 │   │   ├── App.jsx                # Composant principal React
-│   │   ├── main.jsx               # Point d’entrée
+│   │   ├── main.jsx               # Point d'entrée
 │   │   ├── components/            # Composants UI (Header, Footer, etc.)
 │   │   ├── pages/                 # Pages (Connexion, Accueil, etc.)
 │   │   ├── config/                # Fichiers de config (API, routes privées)
@@ -74,11 +77,11 @@ Application web permettant de gérer, uploader, télécharger et sécuriser des 
 
 ### Configuration du Backend
 
-Assurez-vous d’avoir un serveur PHP (Apache ou Nginx) et MySQL/MariaDB installés.
+Assurez-vous d'avoir un serveur PHP (Apache ou Nginx) et MySQL/MariaDB installés.
 
 Importez le fichier `schema.sql` présent dans `database/` dans votre base de données.
 
-Dans le dossier `backend/src/config/`, créez (ou éditez) un fichier d’environnement (par exemple `Environment.php`) pour y définir vos constantes :
+Dans le dossier `backend/src/config/`, créez (ou éditez) un fichier d'environnement (par exemple `Environment.php`) pour y définir vos constantes :
 
 ```php
 <?php
@@ -124,6 +127,9 @@ Une fois l'application installée :
    - 📥 Téléchargement de fichiers
    - 📁 Visualisation des fichiers
    - 🔒 Accès à des sections verrouillées/déverrouillées selon votre statut
+   - 🔗 Partage de fichiers avec d'autres utilisateurs
+   - 📨 Création de liens de partage publics
+   - 👥 Gestion des fichiers partagés avec vous
 
 ---
 
@@ -133,7 +139,7 @@ Une fois l'application installée :
 # Lancer le serveur de développement
 npm run dev
 
-# Construire l’application pour la production
+# Construire l'application pour la production
 npm run build
 
 # Prévisualiser la version de production (nécessite le package 'serve')
@@ -145,6 +151,8 @@ npm run preview
 - `users` : Informations des utilisateurs (id, nom, mot de passe, email, etc.)
 - `files` : Métadonnées des fichiers (nom, chemin, date, propriétaire, etc.)
 - `downloads` (optionnel) : Historique des téléchargements
+- `shared_files` : Fichiers partagés entre utilisateurs (fichier, destinataire)
+- `share_links` : Liens de partage publics avec expiration
 
 ## 🔒 Prérequis
 

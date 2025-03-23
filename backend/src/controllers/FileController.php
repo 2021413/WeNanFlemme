@@ -59,20 +59,63 @@ class FileController extends BaseController {
     }
 
     public function createShareLink() {
-        $data = json_decode(file_get_contents('php://input'), true);
-        
-        if (!isset($data['file_id']) || !isset($data['expires_at'])) {
-            return $this->jsonResponse(['error' => 'Missing required fields'], 400);
+        session_start();
+        if (!isset($_SESSION['user_id'])) {
+            return $this->jsonResponse(['error' => 'Unauthorized'], 401);
         }
-
-        $linkHash = $this->fileModel->createShareLink(
-            $data['file_id'],
-            $data['expires_at']
-        );
-
-        return $this->jsonResponse([
-            'link' => $linkHash
-        ]);
+        
+        try {
+            // Récupérer les données du corps de la requête
+            $data = json_decode(file_get_contents('php://input'), true);
+            if (!isset($data['file_id'])) {
+                return $this->jsonResponse(['error' => 'ID du fichier manquant'], 400);
+            }
+            
+            // Récupérer le fichier
+            $fileId = $data['file_id'];
+            $file = $this->fileModel->findById($fileId);
+            
+            if (!$file || $file['user_id'] != $_SESSION['user_id']) {
+                return $this->jsonResponse(['error' => 'Fichier non trouvé ou accès non autorisé'], 404);
+            }
+            
+            // Si un nom d'utilisateur est fourni, partager avec cet utilisateur
+            if (isset($data['username']) && !empty($data['username'])) {
+                $username = $data['username'];
+                
+                $success = $this->fileModel->shareFileWithUser($fileId, $username);
+                
+                if (!$success) {
+                    return $this->jsonResponse(['error' => 'Utilisateur non trouvé ou erreur lors du partage'], 400);
+                }
+                
+                return $this->jsonResponse([
+                    'success' => true,
+                    'message' => 'Fichier partagé avec ' . $username
+                ]);
+            }
+            
+            // Sinon, créer un lien de partage public
+            $now = new DateTime();
+            $expiresAt = $now->modify('+7 days')->format('Y-m-d H:i:s');
+            
+            $linkHash = $this->fileModel->createShareLink($fileId, $expiresAt);
+            
+            $baseUrl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+            $shareUrl = $baseUrl . "/shared/" . $linkHash;
+            
+            return $this->jsonResponse([
+                'success' => true,
+                'link' => $shareUrl,
+                'expires_at' => $expiresAt
+            ]);
+        } catch (Exception $e) {
+            // Ajoutez une gestion d'exceptions pour éviter les erreurs 500 silencieuses
+            return $this->jsonResponse([
+                'error' => 'Erreur serveur: ' . $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ], 500);
+        }
     }
 
     public function listUserFiles() {

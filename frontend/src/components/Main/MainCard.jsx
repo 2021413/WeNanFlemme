@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react"
 import "../../styles/card.css"
 import CardFolder from "./CardFolder"
-import JSZip from 'jszip';
+import JSZip from 'jszip'
 
 function MainCard() {
     const fileInputRef = useRef(null)
@@ -11,7 +11,6 @@ function MainCard() {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [isUploading, setIsUploading] = useState(false)
-    const [isExpanded, setIsExpanded] = useState(false)
     const [isHistoryVisible, setIsHistoryVisible] = useState(false)
     const [refreshTrigger, setRefreshTrigger] = useState(0)
 
@@ -21,6 +20,17 @@ function MainCard() {
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0]
+        
+        // Vérifier si c'est un fichier PHP
+        const fileName = selectedFile?.name || ''
+        if (fileName.toLowerCase().endsWith('.php')) {
+            alert("Les fichiers PHP ne sont pas autorisés pour des raisons de sécurité.")
+            if (fileInputRef.current) {
+                fileInputRef.current.value = ""
+            }
+            return
+        }
+        
         if (selectedFile && selectedFile.size <= 20 * 1024 * 1024) { // 20Mo max
             setFile(selectedFile)
         } else {
@@ -29,14 +39,28 @@ function MainCard() {
     }
 
     const handleFolderClick = () => {
-        folderInputRef.current.click();
-    };
+        folderInputRef.current.click()
+    }
 
     const handleFolderUpload = async (event) => {
-        const selectedFolder = event.target.files;
-        const folderPath = selectedFolder[0].webkitRelativePath;
-        const folderName = folderPath.split('/')[0];
-        setFolder({ files: selectedFolder, name: folderName });
+        const selectedFolder = event.target.files
+        
+        // Vérifier s'il y a des fichiers PHP dans le dossier
+        const hasPHPFiles = Array.from(selectedFolder).some(file => 
+            file.name.toLowerCase().endsWith('.php')
+        )
+        
+        if (hasPHPFiles) {
+            alert("Les dossiers contenant des fichiers PHP ne sont pas autorisés pour des raisons de sécurité.")
+            if (folderInputRef.current) {
+                folderInputRef.current.value = ""
+            }
+            return
+        }
+        
+        const folderPath = selectedFolder[0].webkitRelativePath
+        const folderName = folderPath.split('/')[0]
+        setFolder({ files: selectedFolder, name: folderName })
     }
 
     const handleSubmit = async () => {
@@ -48,26 +72,56 @@ function MainCard() {
             alert("Veuillez ajouter un titre")
             return
         }
+        
+        // Vérifier si le titre contient .php
+        if (title.toLowerCase().endsWith('.php')) {
+            alert("Les fichiers PHP ne sont pas autorisés pour des raisons de sécurité.")
+            return
+        }
 
         setIsUploading(true)
         const formData = new FormData()
 
         try {
+            let finalTitle = title
+            
+            // Ajouter l'extension au titre en fonction du type de contenu
+            if (file && !folder) {
+                // Extraire l'extension du fichier
+                const fileParts = file.name.split('.')
+                const fileExtension = fileParts.length > 1 ? `.${fileParts[fileParts.length - 1]}` : ''
+                
+                // Vérifier si le titre contient déjà l'extension
+                if (!finalTitle.toLowerCase().endsWith(fileExtension.toLowerCase())) {
+                    finalTitle = finalTitle + fileExtension
+                }
+            } else if (folder) {
+                // Ajouter l'extension .zip pour les dossiers
+                if (!finalTitle.toLowerCase().endsWith('.zip')) {
+                    finalTitle = finalTitle + '.zip'
+                }
+            }
+            
             if (folder) {
-                const zip = new JSZip();
+                const zip = new JSZip()
                 
                 for (let i = 0; i < folder.files.length; i++) {
-                    const file = folder.files[i];
-                    zip.file(file.name, file);
+                    const file = folder.files[i]
+                    // Vérifier à nouveau si un fichier PHP est présent
+                    if (file.name.toLowerCase().endsWith('.php')) {
+                        throw new Error("Les fichiers PHP ne sont pas autorisés")
+                    }
+                    zip.file(file.name, file)
                 }
                 
-                const zipContent = await zip.generateAsync({type: "blob"});
-                formData.append('file', zipContent, 'folder.zip');
+                const zipContent = await zip.generateAsync({type: "blob"})
+                formData.append('file', zipContent, 'folder.zip')
             } else {
                 formData.append("file", file)
             }
 
-            formData.append("title", title)
+            // Utiliser le titre avec extension
+            formData.append("title", finalTitle)
             formData.append("description", description)
 
             const response = await fetch("http://localhost:8000/api/files/upload", {
@@ -114,7 +168,7 @@ function MainCard() {
                             style={{ display: 'none' }} 
                             onChange={handleFileChange}
                         />
-                        <img src="../../static/icons/Plus-icon.svg" className="main-card__button-icon"/>
+                        <img src="../../static/icons/Plus-icon.svg" className="main-card__button-icon" alt="Ajouter un fichier"/>
                         <p className="main-card__button-text">
                             {file ? file.name : "Ajouter un fichier"}
                         </p>
@@ -129,7 +183,7 @@ function MainCard() {
                             style={{ display: 'none' }}
                             onChange={handleFolderUpload}
                         />
-                        <img src="../../static/icons/Folder-icon.svg" className="main-card__button-icon"/>
+                        <img src="../../static/icons/Folder-icon.svg" className="main-card__button-icon" alt="Ajouter un dossier"/>
                         <p className="main-card__button-text">
                             {folder ? folder.name : "Ajouter un dossier"}
                         </p>
@@ -140,6 +194,7 @@ function MainCard() {
                     <div className="main-card__form-group">
                         <label htmlFor="titre" className="main-card__title-label">Titre</label>
                         <input 
+                            id="titre"
                             className="main-card__title-input"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
@@ -150,6 +205,7 @@ function MainCard() {
                     <div className="main-card__form-group">
                         <label htmlFor="description" className="main-card__description-label">Description</label>
                         <textarea 
+                            id="description"
                             className="main-card__description-input"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
@@ -173,7 +229,12 @@ function MainCard() {
                     <h1 className="main-card__files-title">Mes fichiers</h1>
                     <CardFolder refreshTrigger={refreshTrigger} />
                 </div>
-                <img className="main-card__chevron" src="../../static/icons/chevron-right.svg" onClick={toggleHistoryVisibility} />
+                <img 
+                    className="main-card__chevron" 
+                    src="../../static/icons/chevron-right.svg" 
+                    onClick={toggleHistoryVisibility}
+                    alt="Afficher/masquer l'historique" 
+                />
             </div>
         </div>
     )
