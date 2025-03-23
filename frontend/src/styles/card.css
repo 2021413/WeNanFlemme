@@ -115,6 +115,13 @@
     font-family: 'Inter', sans-serif;
     font-size: 12px;
     cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.main-card__convert-button:focus {
+    outline: none;
+    box-shadow: none;
 }
 
 .main-card__right-side {

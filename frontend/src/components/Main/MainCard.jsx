@@ -220,7 +220,7 @@ function MainCard() {
                     disabled={isUploading}
                 >
                     <h3 className="main-card__button-text">
-                        {isUploading ? "Upload en cours..." : "Obtenir un lien"}
+                        {isUploading ? "Upload en cours..." : "Uploader un fichier"}
                     </h3>
                 </button>
             </div>
