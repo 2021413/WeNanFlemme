@@ -67,7 +67,7 @@ Application web permettant de gérer, uploader, télécharger et sécuriser des 
 └── README.md                      # Ce fichier
 
 ## ⚙️ Installation
-
+```
 1. **Cloner le projet**
 
    ```bash
