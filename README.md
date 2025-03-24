@@ -161,6 +161,3 @@ npm run preview
 - Apache ou Nginx (avec `mod_rewrite` activé)
 - Node.js ≥ 16
 - npm ≥ 8
-```
-
-Ce fichier README fournit une vue d'ensemble complète de votre projet, y compris les étapes nécessaires pour l'installation et l'utilisation.
